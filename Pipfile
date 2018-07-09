@@ -9,6 +9,8 @@ uwsgi = "*"
 pillow = "*"
 
 [dev-packages]
+ipython = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.6"
