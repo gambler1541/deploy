@@ -21,11 +21,10 @@ RUN         echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
 
 # install python
 ENV         PATH /root/.pyenv/bin:$PATH
+RUN         pyenv install 3.6.5
+# pipenv
 RUN         eval "$(pyenv init -)"
 RUN         eval "$(pyenv virtualenv-init -)"
-RUN         pyenv install 3.6.5
-
-# pipenv
 RUN         apt -y install software-properties-common python-software-properties
 RUN         add-apt-repository -y ppa:pypa/ppa
 RUN         apt -y update
