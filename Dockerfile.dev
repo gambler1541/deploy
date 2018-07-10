@@ -1,9 +1,15 @@
 FROM        ec2-deploy:base
 
-ENV         PROJECT_DIR     /srv/project
+ENV         PROJECT_DIR             /srv/project
 
 # Nginx, Supervisor install
 RUN          apt -y install nginx supervisor
+
+# Build mode
+ENV         BUILD_MODE      dev
+
+# settings.dev로 설정
+ENV         DJANGO_SETTINGS_MODULE  config.settings.dev
 
 
 # Copy project files
@@ -17,11 +23,11 @@ ENV         VENV_PATH       $VENV_PATH
 
 #Nginx config
             # nginx.conf(Nginx자체 설정파일)을 덮어씌우기
-RUN         cp -f   ${PROJECT_DIR}/.config/nginx.conf \
+RUN         cp -f   ${PROJECT_DIR}/.config/${BUILD_MODE}nginx.conf \
                     /etc/nginx/nginx.conf && \
 
             # available에 nginx_app.conf 파일 복사
-            cp -f   ${PROJECT_DIR}/.config/nginx_app.conf \
+            cp -f   ${PROJECT_DIR}/.config/${BUILD_MODE}nginx_app.conf \
                     /etc/nginx/sites-available/ && \
             # 이미 sites-enabled에 있던 모든 내용 삭제
             rm -f   /etc/nginx/sites-enabled/* && \
@@ -30,7 +36,7 @@ RUN         cp -f   ${PROJECT_DIR}/.config/nginx.conf \
                     /etc/nginx/sites-enabled
 
 
-RUN         cp -f   ${PROJECT_DIR}/.config/supervisor_app.conf \
+RUN         cp -f   ${PROJECT_DIR}/.config/${BUILD_MODE}supervisor_app.conf \
                     /etc/supervisor/conf.d/
 
 CMD         supervisord -n

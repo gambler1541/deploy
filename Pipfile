@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 uwsgi = "*"
 pillow = "*"
+"psycopg2-binary" = "*"
+"boto3" = "*"
 
 [dev-packages]
 ipython = "*"
