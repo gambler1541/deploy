@@ -26,7 +26,7 @@ echo "- Upload files"
 
 # 서버 접속 후 SERVER_DIR로 이동, pipenv --venv로 가상환경의 경로 가져오기
 VENV_PATH=$(${CMD_CONNECT} "cd ${SERVER_DIR} && pipenv --venv")
-# 가상환경의 경로에 /bin/python을 붙여 서버에서 사용하는 python의 경로 만들기
+# 가상환경의 경로에 /bin/python을 붙여 서버에서 사용하는 python의 경로 만들기bi/
 PYTHON_PATH="${VENV_PATH}/bin/python"
 echo " -Get Python path ${PYTHON_PATH}"
 
